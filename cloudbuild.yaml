@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: [
+      'run', 'deploy', 'ashish-cloudrun',
+      '--image', 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--allow-unauthenticated'
+    ]
+
+images:
+  - 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image'
