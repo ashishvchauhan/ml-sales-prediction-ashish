@@ -3,20 +3,20 @@ steps:
     args: ['build', '-t', 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image']
+    args: ['push', 'us-central1-docker.pkg.dev/faa-gcp-training-14-kfa-0808/ml-sales-prediction-ashish/ashish-predict-image']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: [
       'run', 'deploy', 'ashish-cloudrun',
-      '--image', 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image',
+      '--image', 'us-central1-docker.pkg.dev/faa-gcp-training-14-kfa-0808/ml-sales-prediction-ashish/ashish-predict-image',
       '--region', 'us-central1',
       '--platform', 'managed',
       '--allow-unauthenticated'
     ]
 
 images:
-  - 'gcr.io/faa-gcp-training-14-kfa-0808/ashish-predict-image'
+  - 'us-central1-docker.pkg.dev/faa-gcp-training-14-kfa-0808/ml-sales-prediction-ashish/ashish-predict-image'
 
 options:
   logging: CLOUD_LOGGING_ONLY
